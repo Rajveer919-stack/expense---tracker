@@ -1,37 +1,38 @@
 # ========== IMPORTS ==========
-from datetime import date   # aaj ki date lene ke liye
+from datetime import date   # to get today's date
 
-# ========== FILE ka naam (kharche yahan save honge) ==========
+# ========== FILE NAME (expenses are saved here) ==========
 FILE_NAME = "expenses.txt"
 
 
-# ========== 1. KHARCHA ADD KARNA ==========
+# ========== 1. ADD AN EXPENSE ==========
 def add_expense():
-    category = input("Category (food/travel/etc): ")
+    # Commas are replaced because the file uses commas as separators
+    category = input("Category (food/travel/etc): ").strip().replace(",", " ")
 
-    # Galat amount (jaise "abc") likhne par program crash na ho
+    # Prevent a crash if the user types something that is not a number
     try:
         amount = float(input("Amount: "))
     except ValueError:
-        print("Amount number mein likho!")
+        print("Please enter the amount as a number!")
         return
 
     today = date.today()
 
-    # "a" mode = file ke end mein naya data jodna
+    # "a" mode = append new data at the end of the file
     with open(FILE_NAME, "a") as f:
         f.write(f"{today},{category},{amount}\n")
 
-    print("Kharcha add ho gaya!")
+    print("Expense added!")
 
 
-# ========== 2. SAARE KHARCHE DEKHNA ==========
+# ========== 2. VIEW ALL EXPENSES ==========
 def view_expenses():
     try:
         with open(FILE_NAME, "r") as f:
             lines = f.readlines()
     except FileNotFoundError:
-        print("Abhi koi kharcha nahi hai.")
+        print("No expenses yet.")
         return
 
     print("\nDate | Category | Amount")
@@ -40,7 +41,7 @@ def view_expenses():
         print(f"{d} | {category} | Rs {amount}")
 
 
-# ========== 3. TOTAL NIKALNA ==========
+# ========== 3. CALCULATE THE TOTAL ==========
 def show_total():
     total = 0
     try:
@@ -49,12 +50,12 @@ def show_total():
                 amount = float(line.strip().split(",")[2])
                 total += amount
     except FileNotFoundError:
-        pass   # file nahi hai to total 0 hi rahega
+        pass   # no file means the total stays 0
 
-    print(f"Total kharcha: Rs {total}")
+    print(f"Total expenses: Rs {total}")
 
 
-# ========== 4. MAIN MENU (program yahan se chalta hai) ==========
+# ========== 4. MAIN MENU (the program starts here) ==========
 while True:
     print("\n1. Add  2. View  3. Total  4. Exit")
     choice = input("Choose: ")
@@ -69,4 +70,4 @@ while True:
         print("Bye!")
         break
     else:
-        print("Galat option, dobara try karo.")
+        print("Invalid option, please try again.")

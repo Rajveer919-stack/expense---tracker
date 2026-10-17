@@ -1,20 +1,19 @@
 # Expense Tracker
 
-Python se bana command-line app jo daily kharche track karta hai.
+A command-line Python app to track daily expenses.
 
 ## Features
-- Kharcha add karna (category, amount, date)
-- Saare kharche dekhna
-- Total kharcha nikalna
-- Data file mein save hota hai
+- Add an expense (category, amount, date)
+- View all expenses
+- Calculate the total spent
+- Data is saved in a text file
 
-## Kaise chalayein
-1. Python install hona chahiye
-2. Terminal mein chalao: `python main.py`
+## How to run
+1. Make sure Python is installed
+2. Run: `python main.py`
 
-## Tech Used
-- Python
-- File Handling
+## Tech used
+Python, file handling
 
 ## Author
 Rajveer Vishwakarma
